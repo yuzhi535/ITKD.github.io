@@ -62,7 +62,7 @@
             <h1 class="title is-1 publication-title">Instance Temperature Knowledge Distillation</h1>
             <div class="is-size-5 publication-authors">
               <span class="author-block">
-                <a href="https://scholar.google.com/citations?user=4uHpwzkAAAAJ&hl=en&oi=sra">Zhengbo
+                <a href="https://scholar.google.com/user=4uHpwzkAAAAJ&hl=en">Zhengbo
                   Zhang</a><sup>2</sup>,</span>
               <span class="author-block">
                 <a href="https://zayx.me">Yuxi Zhou</a><sup>1</sup>,</span>
@@ -103,7 +103,7 @@
                 </span>
                 <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="https://github.com/google/nerfies" class="external-link button is-normal is-rounded is-dark">
+                  <a href="https://github.com/yuzhi535/RLKD" class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
@@ -151,132 +151,58 @@
 
 
 
-  <section class="section">
-    <div class="container is-max-desktop">
-      <!-- Table Section -->
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Student network top-1 accuracy on CIFAR-100</h2>
-          <div class="table-container">
-            <table class="table is-bordered is-hoverable is-fullwidth">
-              <thead>
-                <tr>
-                  <th>Teacher</th>
-                  <th>RN-56</th>
-                  <th>RN-110</th>
-                  <th>RN-110</th>
-                  <th>WRN-40-2</th>
-                  <th>WRN-40-2</th>
-                  <th>VGG-13</th>
-                  <th>WRN-40-2</th>
-                  <th>VGG-13</th>
-                  <th>RN-50</th>
-                  <th>RN-32×4</th>
-                  <th>RN-32×4</th>
-                </tr>
-                <tr>
-                  <th>Acc</th>
-                  <th>72.34</th>
-                  <th>74.31</th>
-                  <th>74.31</th>
-                  <th>75.61</th>
-                  <th>75.61</th>
-                  <th>74.64</th>
-                  <th>75.61</th>
-                  <th>74.64</th>
-                  <th>79.34</th>
-                  <th>79.42</th>
-                  <th>79.42</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Student</td>
-                  <td>RN-20</td>
-                  <td>RN-32</td>
-                  <td>RN-20</td>
-                  <td>WRN-16-2</td>
-                  <td>WRN-40-1</td>
-                  <td>VGG-8</td>
-                  <td>SN-V1</td>
-                  <td>MN-V2</td>
-                  <td>MN-V2</td>
-                  <td>SN-V1</td>
-                  <td>SN-V2</td>
-                </tr>
-                <tr>
-                  <td>Acc</td>
-                  <td>69.06</td>
-                  <td>71.14</td>
-                  <td>69.06</td>
-                  <td>73.26</td>
-                  <td>71.98</td>
-                  <td>70.36</td>
-                  <td>70.50</td>
-                  <td>64.60</td>
-                  <td>64.60</td>
-                  <td>70.50</td>
-                  <td>71.82</td>
-                </tr>
-                <tr>
-                  <td>Vanilla KD</td>
-                  <td>70.66</td>
-                  <td>73.08</td>
-                  <td>70.66</td>
-                  <td>74.92</td>
-                  <td>73.54</td>
-                  <td>72.98</td>
-                  <td>74.83</td>
-                  <td>67.37</td>
-                  <td>67.35</td>
-                  <td>74.07</td>
-                  <td>74.45</td>
-                </tr>
-                <tr>
-                  <td>+CTKD</td>
-                  <td>71.11</td>
-                  <td>73.47</td>
-                  <td>71.08</td>
-                  <td>75.40</td>
-                  <td>73.97</td>
-                  <td>73.48</td>
-                  <td>75.70</td>
-                  <td>68.42</td>
-                  <td>68.51</td>
-                  <td>74.52</td>
-                  <td>75.26</td>
-                </tr>
-                <tr>
-                  <td>+Ours</td>
-                  <td>71.40</td>
-                  <td>73.81</td>
-                  <td>71.44</td>
-                  <td>75.79</td>
-                  <td>74.17</td>
-                  <td>73.75</td>
-                  <td>76.01</td>
-                  <td>68.73</td>
-                  <td>68.75</td>
-                  <td>74.84</td>
-                  <td>75.55</td>
-                </tr>
-              </tbody>
-            </table>
-            <p class="caption">
-              Testing the performance of Vanilla KD as well as Vanilla KD with the incorporation of instance temperature adjustment using CTKD and our RLKD, respectively.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  
-
 
   <section class="section">
     <div class="container is-max-desktop">
-
       
+      <!-- method flow. -->
+      <h3 class="title is-4">Overview of our RLKD method.</h3>
+      <div class="content has-text-justified">
+        <p>
+          We propose RLKD, a novel approach for knowledge distillation (KD) that leverages reinforcement
+          learning (RL) to dynamically adjust the instance temperature. To guide the RL agent, a state representation
+          incorporating performance and uncertainty features is designed. However, applying RL to KD introduces a
+          delayed reward problem due to batch training. To mitigate this, an instance reward calibration method based on
+          reward decomposition is introduced. Additionally, an efficient exploration strategy is employed to accelerate
+          the agent's learning in the early stages by focusing on high-quality training instances.
+
+        </p>
+      </div>
+
+      <div class="content has-text-centered">
+        <img src="./static/images/fig1.png" />
+      </div>
+      <div class="content has-text-justified ">
+        <p>
+          Solid lines represent the processing flow of the training instances in our framework, and
+          dashed lines indicate the backpropagation process used for model (student model and agent) updates
+        </p>
+      </div>
+
+
+      <!--/ method flow. -->
+
+      <!-- results. -->
+      <h3 class="title is-4">Results of our RLKD method.</h3>
+      <div class="content has-text-centered">
+        <img src="./static/images/table1.png" width="60%" height="60%" />
+      </div>
+      <div class="content has-text-justified">
+        <p>
+          Student network top-1 accuracy on CIFAR-100. Testing the performance of Vanilla KD as well as Vanilla KD with
+          the incorpora-
+          tion of instance temperature adjustment using CTKD and our RLKD, respectively
+        </p>
+      </div>
+      <div class="content has-text-centered">
+        <img src="./static/images/table2.png" />
+      </div>
+      <div class="content has-text-justified">
+        <p>
+          Student network Top-1 accuracy on CIFAR-100 dataset
+        </p>
+      </div>
+      <!--/ results. -->
 
       <!-- Concurrent Work. -->
       <!-- <div class="columns is-centered">
